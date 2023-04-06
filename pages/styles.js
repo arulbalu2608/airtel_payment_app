@@ -3,39 +3,40 @@ import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
+import {COLORS} from '../helpers/colors';
 
 export const styles = StyleSheet.create({
   container: {
     padding: wp('7%'),
     flex: 1,
-    backgroundColor: '#edf5ff',
+    backgroundColor: COLORS.WHITE_FE,
     borderTopStartRadius: wp('5%'),
     borderTopEndRadius: wp('5%'),
   },
 
   title: {
-    color: '#ffffff',
+    color: COLORS.WHITE,
     textAlign: 'center',
   },
   contactContainer: {
-    backgroundColor: '#686262',
+    backgroundColor: COLORS.GRAY_62,
     borderWidth: 1,
-    borderColor: '#ffffff',
+    borderColor: COLORS.WHITE,
     borderRadius: 7,
     paddingHorizontal: wp('4%'),
     paddingVertical: wp('1%'),
     marginVertical: wp('3%'),
   },
   contactTitle: {
-    color: '#ffffff',
+    color: COLORS.WHITE,
   },
   input: {
-    height: 40,
+    height: hp('6%'),
     borderWidth: 1,
-    borderColor: '#686262',
+    borderColor: COLORS.GRAY_62,
     borderWidth: 1,
-    borderRadius: 10,
-    padding: 10,
+    borderRadius: wp('2%'),
+    padding: wp('2%'),
   },
   searchContainer: {
     flexDirection: 'row',
@@ -49,5 +50,13 @@ export const styles = StyleSheet.create({
     paddingVertical: wp('4%'),
     borderBottomColor: 'gray',
     borderBottomWidth: 1,
+  },
+
+  activeTab: {
+    color: 'black',
+    fontWeight: 700,
+  },
+  tab: {
+    color: COLORS.GRAY_62,
   },
 });

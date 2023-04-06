@@ -5,16 +5,13 @@ import filterIcon from '../assets/filter_line.png';
 import SearchIcon from '../assets/search_icon.png';
 import {styles} from './styles.js';
 import Card from '../Components/Card';
+import {connect} from 'react-redux';
 
 class Home extends Component {
   constructor() {
     super();
-    this.state = {search: ''};
-  }
-
-  handleSearch = text => {
-    this.setState({
-      search: text,
+    this.state = {
+      search: '',
       tab: [
         {
           id: 1,
@@ -30,8 +27,20 @@ class Home extends Component {
         },
       ],
       activeTab: 1,
+    };
+  }
+
+  handleSearch = text => {
+    this.setState({
+      search: text,
     });
   };
+  handleTab = id => {
+    this.setState({
+      activeTab: id,
+    });
+  };
+
   render() {
     return (
       <>
@@ -79,34 +88,22 @@ class Home extends Component {
           </View>
 
           <View style={styles.tabContainer}>
-            <TouchableOpacity>
-              <Text
-                style={{
-                  color: 'gray',
-                }}>
-                money saver
-              </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity>
-              <Text
-                style={{
-                  color: 'gray',
-                  borderBottomWidth: 1,
-                  borderBottomColor: 'red',
-                }}>
-                entertainment
-              </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity>
-              <Text
-                style={{
-                  color: 'gray',
-                }}>
-                basic
-              </Text>
-            </TouchableOpacity>
+            {this.state.tab.map(data => {
+              return (
+                <TouchableOpacity
+                  key={data.id}
+                  onPress={() => this.handleTab(data.id)}>
+                  <Text
+                    style={
+                      data.id === this.state.activeTab
+                        ? styles.activeTab
+                        : styles.tab
+                    }>
+                    {data.label}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
           </View>
 
           <Card />
@@ -116,4 +113,8 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = state => {
+  return {rechargePlan: state?.reducer?.rechargePlan};
+};
+
+export default connect(mapStateToProps)(Home);
