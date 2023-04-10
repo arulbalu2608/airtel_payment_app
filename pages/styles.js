@@ -30,14 +30,7 @@ export const styles = StyleSheet.create({
   contactTitle: {
     color: COLORS.WHITE,
   },
-  input: {
-    height: hp('6%'),
-    borderWidth: 1,
-    borderColor: COLORS.GRAY_62,
-    borderWidth: 1,
-    borderRadius: wp('2%'),
-    padding: wp('2%'),
-  },
+
   searchContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -58,5 +51,35 @@ export const styles = StyleSheet.create({
   },
   tab: {
     color: COLORS.GRAY_62,
+  },
+  iconStyle: {
+    width: '20%',
+    alignItems: 'center',
+  },
+  icon: {
+    width: 25,
+    height: 25,
+  },
+
+  filterBoxContainer: {
+    backgroundColor: 'white',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 15,
+    marginHorizontal: 10,
+  },
+
+  filterText: {
+    color: COLORS.BLACK,
+  },
+  activeFilter: {
+    backgroundColor: 'black',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 15,
+    marginHorizontal: 10,
+  },
+  activeFilterText: {
+    color: COLORS.WHITE,
   },
 });

@@ -3,11 +3,16 @@ import {Text, View} from 'react-native';
 import {styles} from './styles.js';
 
 class Card extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <View style={styles.container}>
         <View>
-          <Text style={styles.topContent}>Last Recharge</Text>
+          {this.props?.item?.isLastRecharge && (
+            <Text style={styles.topContent}>Last Recharge</Text>
+          )}
         </View>
         <View style={styles.cardBody}>
           <View
@@ -23,7 +28,7 @@ class Card extends Component {
                 style={{
                   color: 'black',
                 }}>
-                ₹ 589
+                {`₹${this.props?.item?.finalPrice}`}
               </Text>
               <Text
                 style={{
@@ -37,7 +42,7 @@ class Card extends Component {
                 style={{
                   color: 'black',
                 }}>
-                40Mbps
+                {`${this.props?.item?.speed}Mbps`}
               </Text>
               <Text
                 style={{
@@ -51,7 +56,7 @@ class Card extends Component {
                 style={{
                   color: 'black',
                 }}>
-                1 Month
+                {`${this.props?.item?.validity} Month`}
               </Text>
               <Text
                 style={{

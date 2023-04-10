@@ -27,4 +27,11 @@ export const styles = StyleSheet.create({
   contactTitle: {
     color: COLORS.WHITE,
   },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    marginTop: 22,
+  },
 });
