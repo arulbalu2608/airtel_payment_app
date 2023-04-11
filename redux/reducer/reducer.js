@@ -73,6 +73,33 @@ const initialState = {
       premium: 'Xstream Premium',
       isOfferApplied: true,
     },
+    {
+      _id: 9,
+      isLastRecharge: false,
+      finalPrice: 1000,
+      speed: 100,
+      validity: 1,
+      premium: 'Xstream Premium',
+      isOfferApplied: true,
+    },
+    {
+      _id: 10,
+      isLastRecharge: false,
+      finalPrice: 2000,
+      speed: 200,
+      validity: 2,
+      premium: 'Xstream Premium',
+      isOfferApplied: true,
+    },
+    {
+      _id: 11,
+      isLastRecharge: false,
+      finalPrice: 3000,
+      speed: 300,
+      validity: 3,
+      premium: 'Xstream Premium',
+      isOfferApplied: true,
+    },
   ],
 };
 

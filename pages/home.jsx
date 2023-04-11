@@ -1,26 +1,21 @@
 import React, {Component} from 'react';
 import {
-  Alert,
-  Linking,
   FlatList,
   Image,
+  PermissionsAndroid,
+  ScrollView,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
-  ScrollView,
 } from 'react-native';
+import Contacts from 'react-native-contacts';
 import {connect} from 'react-redux';
 import Card from '../Components/Card';
 import Header from '../Components/Header';
-import filterIcon from '../assets/filter_line.png';
-import SearchIcon from '../assets/search_icon.png';
-import closeIcon from '../assets/close.png';
-import {styles} from './styles.js';
-import Contacts from 'react-native-contacts';
-import {PermissionsAndroid} from 'react-native';
-import {COLORS} from '../helpers/colors';
 import SearchBox from '../Components/SearchBox';
+import closeIcon from '../assets/close.png';
+import filterIcon from '../assets/filter_line.png';
+import {styles} from './styles.js';
 
 class Home extends Component {
   constructor(props) {
@@ -44,7 +39,8 @@ class Home extends Component {
         },
       ],
       filterOption: [100, 200, 300, 400],
-      filter: [],
+      filterSpeed: [],
+      filterPlan: [],
       activeTab: 1,
       showFilter: false,
     };
@@ -134,17 +130,26 @@ class Home extends Component {
   handleFilter = () => {
     this.setState({
       showFilter: !this.state.showFilter,
+      filterData: [],
     });
   };
 
   applyFilter = filterData => {
-    if (this.state.filter.includes(filterData)) {
+    if (this.state.filterSpeed.includes(filterData)) {
+      let temp = this.state.filterPlan.filter(
+        data => data.speed !== filterData,
+      );
       this.setState({
-        filter: this.state.filter.filter(data => data !== filterData),
+        filterSpeed: this.state.filterSpeed.filter(data => data !== filterData),
+        filterPlan: temp,
       });
     } else {
+      let temp = this.props.rechargePlan.filter(
+        data => data.speed === filterData,
+      );
       this.setState({
-        filter: [...this.state.filter, filterData],
+        filterSpeed: [...this.state.filterSpeed, filterData],
+        filterPlan: [...this.state.filterPlan, ...temp],
       });
     }
   };
@@ -153,7 +158,7 @@ class Home extends Component {
     return (
       <>
         <Header contactList={this.state.contactList} />
-        {console.log(this.state.filter)}
+
         <View style={styles.container}>
           {this.state.showFilter ? (
             <View
@@ -169,14 +174,14 @@ class Home extends Component {
                     <TouchableOpacity
                       key={index}
                       style={
-                        this.state.filter.includes(data)
+                        this.state.filterSpeed.includes(data)
                           ? styles.activeFilter
                           : styles.filterBoxContainer
                       }
                       onPress={() => this.applyFilter(data)}>
                       <Text
                         style={
-                          this.state.filter.includes(data)
+                          this.state.filterSpeed.includes(data)
                             ? styles.activeFilterText
                             : styles.filterText
                         }>{`${data} Mbps`}</Text>
@@ -219,8 +224,13 @@ class Home extends Component {
               })}
             </View>
           )}
+
           <FlatList
-            data={this.state.planData}
+            data={
+              this.state.filterPlan.length > 0
+                ? this.state.filterPlan
+                : this.state.planData
+            }
             renderItem={({item}) => <Card item={item} />}
             keyExtractor={item => item._id}
           />
